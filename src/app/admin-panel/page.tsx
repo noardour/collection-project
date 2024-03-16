@@ -1,6 +1,5 @@
-"use client";
-
-import { Button, Card, CardBody, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { Button, Card, CardBody } from "@nextui-org/react";
+import UsersDisplay from "./UsersDisplay";
 
 export default function Page() {
   return (
@@ -23,40 +22,7 @@ export default function Page() {
         </Card>
       </div>
       <div>
-        <Table>
-          <TableHeader>
-            <TableColumn>Name</TableColumn>
-            <TableColumn>Email</TableColumn>
-            <TableColumn>Status</TableColumn>
-            <TableColumn>Role</TableColumn>
-          </TableHeader>
-          <TableBody emptyContent={"No rows to display."}>
-            <TableRow key="0">
-              <TableCell>Tony Reichert</TableCell>
-              <TableCell>testtest@test.com</TableCell>
-              <TableCell>Active</TableCell>
-              <TableCell>User</TableCell>
-            </TableRow>
-            <TableRow key="1">
-              <TableCell>Zoey Lang</TableCell>
-              <TableCell>testtest@test.com</TableCell>
-              <TableCell>Active</TableCell>
-              <TableCell>Admin</TableCell>
-            </TableRow>
-            <TableRow key="2">
-              <TableCell>Jane Fisher</TableCell>
-              <TableCell>testtest@test.com</TableCell>
-              <TableCell>Blocked</TableCell>
-              <TableCell>User</TableCell>
-            </TableRow>
-            <TableRow key="3">
-              <TableCell>William Howard</TableCell>
-              <TableCell>testtest@test.com</TableCell>
-              <TableCell>Active</TableCell>
-              <TableCell>User</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <UsersDisplay />
       </div>
     </div>
   );
