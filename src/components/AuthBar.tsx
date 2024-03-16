@@ -8,7 +8,9 @@ const AuthBar: FC = () => {
       <Link href="/login">
         <Button variant="light">Log in</Button>
       </Link>
-      <Button variant="light">Register</Button>
+      <Link href="/registration">
+        <Button variant="light">Register</Button>
+      </Link>
     </>
   );
 };
