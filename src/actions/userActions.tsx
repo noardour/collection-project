@@ -1,11 +1,19 @@
 "use server";
 
+import { IUser } from "@/types/IUser";
+import { validateLogin } from "@/validators/loginValidator";
+import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(4).max(30),
-});
+const prisma = new PrismaClient();
+
+export async function fetchUsers(): Promise<IUser[]> {
+  const users = await prisma.user.findMany({
+    select: { id: true, name: true, email: true, status: true, role: true, createdAt: true },
+  });
+
+  return users;
+}
 
 export interface LoginState {
   msg?: string | null;
@@ -16,18 +24,10 @@ export interface LoginState {
 }
 
 export async function login(prevState: LoginState, formData: FormData) {
-  const validatedFields = loginSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
+  const validatedFields = await validateLogin(formData);
   if (!validatedFields.success) {
-    console.log("login error");
-    return {
-      msg: "Somthing goes wrong",
-      errors: validatedFields.error.flatten().fieldErrors,
-    };
+    return { errors: validatedFields.error.flatten().fieldErrors };
   }
-
   return { msg: "success" };
 }
 
