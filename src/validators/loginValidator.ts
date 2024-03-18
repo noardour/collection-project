@@ -5,16 +5,15 @@ import z from "zod";
 
 const prisma = new PrismaClient();
 
-async function emailUnique(email: string) {
+async function emailExist(email: string) {
   const user = await prisma.user.findUnique({
     where: { email },
   });
-  console.log(!!user);
-  return !user;
+  return !!user;
 }
 
 const loginSchema = z.object({
-  email: z.string().min(1, "Email is required").email().refine(emailUnique, "User with this email already exists"),
+  email: z.string().min(1, "Email is required").email().refine(emailExist, "Wrong username."),
   password: z.string().min(4).max(30),
 });
 

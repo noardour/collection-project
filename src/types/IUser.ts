@@ -1,8 +1,12 @@
+export type UserRole = "USER" | "ADMIN";
+
+export type UserStatus = "ACTIVE" | "BLOCKED";
+
 export interface IUser {
   id: string;
   name: string;
   email: string;
-  role: "USER" | "ADMIN";
-  status: "ACTIVE" | "BLOCKED";
+  role: UserRole;
+  status: UserStatus;
   createdAt: Date;
 }
