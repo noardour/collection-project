@@ -1,9 +1,12 @@
 "use server";
 
+import { signIn } from "@/auth/auth";
 import { IUser } from "@/types/IUser";
 import { validateLogin } from "@/validators/loginValidator";
 import { validateRegistration } from "@/validators/registrationValidator";
 import { PrismaClient } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const prisma = new PrismaClient();
@@ -16,20 +19,23 @@ export async function fetchUsers(): Promise<IUser[]> {
   return users;
 }
 
-export interface LoginState {
-  msg?: string | null;
-  errors?: {
-    email?: string[];
-    password?: string[];
-  };
-}
+export type LoginState =
+  | {
+      msg?: string | null;
+      errors?: {
+        email?: string[];
+        password?: string[];
+      };
+    }
+  | undefined;
 
 export async function login(prevState: LoginState, formData: FormData) {
   const validatedFields = await validateLogin(formData);
   if (!validatedFields.success) {
-    return { errors: validatedFields.error.flatten().fieldErrors };
+    return { errors: validatedFields.error.flatten().fieldErrors, msg: "Login error" };
   }
-  return { msg: "success" };
+  await signIn("credentials", validatedFields.data);
+  return;
 }
 
 export interface RegistrationState {

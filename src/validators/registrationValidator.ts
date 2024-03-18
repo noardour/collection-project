@@ -7,7 +7,6 @@ async function emailUnique(email: string) {
   const user = await prisma.user.findUnique({
     where: { email },
   });
-  console.log(!!user);
   return !user;
 }
 
@@ -15,7 +14,6 @@ async function nameUnique(name: string) {
   const user = await prisma.user.findUnique({
     where: { name },
   });
-  console.log(!!user);
   return !user;
 }
 
