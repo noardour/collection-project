@@ -11,8 +11,8 @@ const LoginForm = () => {
 
   return (
     <form action={dispatch} className="flex flex-col gap-4 xl:w-[75%]">
-      <Input label="Email" type="text" name="email" isInvalid={!!state.errors?.email} errorMessage={state.errors?.email} />
-      <Input label="Password" type="password" name="password" isInvalid={!!state.errors?.password} errorMessage={state.errors?.password} />
+      <Input label="Email" type="text" name="email" isInvalid={!!state?.errors?.email} errorMessage={state?.errors?.email} />
+      <Input label="Password" type="password" name="password" isInvalid={!!state?.errors?.password} errorMessage={state?.errors?.password} />
       <Button className="self-start" type="submit" color="primary">
         Log in
       </Button>
