@@ -1,7 +1,7 @@
 import { Button, Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 import Link from "next/link";
 import { FC } from "react";
-import AuthBar from "./AuthBar";
+import AccBar from "./AccBar";
 
 const Header: FC = () => (
   <Navbar maxWidth="xl" isBordered position="static">
@@ -11,7 +11,7 @@ const Header: FC = () => (
       </Link>
     </NavbarBrand>
     <NavbarContent justify="end">
-      <AuthBar />
+      <AccBar />
     </NavbarContent>
   </Navbar>
 );
