@@ -62,3 +62,12 @@ export async function register(prevState: RegistrationState, formData: FormData)
   await signIn("credentials", user);
   return;
 }
+
+export async function removeUser(id: string) {
+  try {
+    await prisma.user.delete({ where: { id } });
+    revalidatePath("/admin-panel");
+  } catch (err) {
+    console.log(err);
+  }
+}
