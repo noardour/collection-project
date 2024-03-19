@@ -38,15 +38,17 @@ export async function login(prevState: LoginState, formData: FormData) {
   return;
 }
 
-export interface RegistrationState {
-  msg?: string | null;
-  errors?: {
-    name?: string[];
-    email?: string[];
-    password?: string[];
-    confirmPassword?: string[];
-  };
-}
+export type RegistrationState =
+  | {
+      msg?: string | null;
+      errors?: {
+        name?: string[];
+        email?: string[];
+        password?: string[];
+        confirmPassword?: string[];
+      };
+    }
+  | undefined;
 
 export async function register(prevState: RegistrationState, formData: FormData) {
   const validatedFields = await validateRegistration(formData);
@@ -55,5 +57,8 @@ export async function register(prevState: RegistrationState, formData: FormData)
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
-  return { msg: "success" };
+  const { confirmPassword, ...data } = validatedFields.data;
+  const user = await prisma.user.create({ data });
+  await signIn("credentials", user);
+  return;
 }
