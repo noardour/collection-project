@@ -1,43 +1,41 @@
-import { IUser, UserRole } from "@/types/IUser";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import { IUser } from "@/types/IUser";
 import type { NextAuthConfig } from "next-auth";
 import { NextResponse } from "next/server";
 import creditailProvider from "./providers/credentials";
-import { getToken } from "next-auth/jwt";
+import { PrismaClient } from "@prisma/client/edge";
 
 const prisma = new PrismaClient();
 
 export const authConfig = {
-  adapter: PrismaAdapter(prisma),
   providers: [creditailProvider],
   pages: {
     signIn: "/login",
+    signOut: "/logout",
   },
   session: {
     strategy: "jwt",
   },
   secret: process.env.AUTH_SECRET,
   callbacks: {
-    async authorized({ auth, request }) {
+    authorized({ auth, request }) {
       if (request.nextUrl.pathname.startsWith("/admin-panel") && auth?.user?.role !== "ADMIN") {
         return NextResponse.rewrite(new URL("/page-that-not-exists", request.nextUrl.origin));
       }
       if (auth && ["/login", "/registration"].includes(request.nextUrl.pathname)) {
         return NextResponse.redirect(new URL("/", request.nextUrl.origin));
       }
+      if (auth && auth.user.status === "BLOCKED") return NextResponse.redirect(new URL("/api/logout", request.nextUrl.origin));
       return true;
     },
-    session({ session, token }) {
-      if (token.role) {
-        session.user.role = token.role as UserRole;
+    async session({ session, token }) {
+      const user = await prisma.user.findUnique({ where: { email: token.email || undefined } });
+      if (user) {
+        session.user.role = user.role;
+        session.user.status = user.status;
       }
       return session;
     },
     jwt({ token, user }) {
-      if (user) {
-        token.role = (user as IUser)?.role;
-      }
       return token;
     },
   },

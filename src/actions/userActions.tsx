@@ -1,9 +1,10 @@
 "use server";
 
 import { signIn } from "@/auth/auth";
-import { IUser } from "@/types/IUser";
+import { IUser, UserRole, UserStatus } from "@/types/IUser";
 import { validateLogin } from "@/validators/loginValidator";
 import { validateRegistration } from "@/validators/registrationValidator";
+import { Selection } from "@nextui-org/react";
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -63,11 +64,31 @@ export async function register(prevState: RegistrationState, formData: FormData)
   return;
 }
 
+export async function setStatus(id: string, status: UserStatus) {
+  await prisma.user.update({ data: { status }, where: { id } });
+  revalidatePath("/admin-panel");
+}
+
+export async function setStatusMany(ids: string[], status: UserStatus) {
+  await prisma.user.updateMany({ data: { status }, where: { id: { in: ids } } });
+  revalidatePath("/admin-panel");
+}
+
+export async function setRole(id: string, role: UserRole) {
+  await prisma.user.update({ data: { role }, where: { id } });
+  revalidatePath("/admin-panel");
+}
+
+export async function setRoleMany(ids: string[], role: UserRole) {
+  await prisma.user.updateMany({ data: { role }, where: { id: { in: ids } } });
+  revalidatePath("/admin-panel");
+}
+
 export async function removeUser(id: string) {
-  try {
-    await prisma.user.delete({ where: { id } });
-    revalidatePath("/admin-panel");
-  } catch (err) {
-    console.log(err);
-  }
+  await prisma.user.delete({ where: { id } });
+  revalidatePath("/admin-panel");
+}
+
+export async function removeUsers(ids: string[]) {
+  await prisma.user.deleteMany({ where: { id: { in: ids } } });
 }
