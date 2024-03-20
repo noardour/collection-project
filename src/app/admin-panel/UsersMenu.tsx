@@ -1,4 +1,4 @@
-import { fetchUsers } from "@/actions/userActions";
+import { fetchUsers } from "@/lib/users/userData";
 import UsersDisplay from "./UsersDisplay";
 
 export default async function UsersMenu() {

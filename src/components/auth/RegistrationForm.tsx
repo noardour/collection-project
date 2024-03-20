@@ -1,6 +1,6 @@
 "use client";
 
-import { RegistrationState, register } from "@/actions/userActions";
+import { register } from "@/lib/auth/authActions";
 import { Button, Input } from "@nextui-org/react";
 import { FC } from "react";
 import { useFormState } from "react-dom";

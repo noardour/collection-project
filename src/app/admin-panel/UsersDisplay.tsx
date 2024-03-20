@@ -5,7 +5,7 @@ import UsersTable from "./UsersTable";
 import UsersToolbar from "./UsersToolbar";
 import { useState } from "react";
 import { Selection } from "@nextui-org/react";
-import { setRole, setRoleMany, setStatusMany } from "@/actions/userActions";
+import { removeUsers, setRoleMany, setStatusMany } from "@/lib/users/userActions";
 
 interface UsersDisplayProps {
   users: IUser[];
@@ -22,6 +22,7 @@ export default function UsersDisplay({ users }: UsersDisplayProps) {
           onUnblock={() => setStatusMany([...selectedUsers] as string[], "ACTIVE")}
           onPromoteToAdmin={() => setRoleMany([...selectedUsers] as string[], "ADMIN")}
           onDowngrateToUser={() => setRoleMany([...selectedUsers] as string[], "USER")}
+          onRemove={() => removeUsers([...selectedUsers] as string[])}
         />
       </div>
       <div>

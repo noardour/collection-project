@@ -1,12 +1,12 @@
 "use client";
 
 import { IUser } from "@/types/IUser";
-import { Chip, ChipProps, Table, TableBody, TableCell, TableColumn, TableHeader, TableProps, TableRow, Tooltip } from "@nextui-org/react";
-import { FC, MouseEventHandler } from "react";
-import { removeUser, setStatus } from "@/actions/userActions";
+import { Chip, ChipProps, Table, TableBody, TableCell, TableColumn, TableHeader, TableProps, TableRow } from "@nextui-org/react";
+import { FC } from "react";
+import { removeUser, setStatus } from "@/lib/users/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faLockOpen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { faEye, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 const statusColorMap: Record<"ACTIVE" | "BLOCKED", ChipProps["color"]> = {
   ACTIVE: "success",

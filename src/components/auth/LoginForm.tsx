@@ -1,11 +1,11 @@
 "use client";
 
-import { LoginState, login } from "@/actions/userActions";
+import { login, LoginState } from "@/lib/auth/authActions";
 import { Button, Input } from "@nextui-org/react";
 import { FC } from "react";
 import { useFormState } from "react-dom";
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
   const initialState: LoginState = {};
   const [state, dispatch] = useFormState(login, initialState);
 
