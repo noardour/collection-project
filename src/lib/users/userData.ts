@@ -6,7 +6,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function fetchUsers(): Promise<IUser[]> {
-  return await prisma.user.findMany();
+  return await prisma.user.findMany({ orderBy: [{ createdAt: "asc" }] });
 }
 
 export async function fetchUser(id: IUser["id"]) {
