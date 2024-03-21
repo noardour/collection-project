@@ -3,12 +3,12 @@
 import { IUser } from "@/types/IUser";
 import { Chip, ChipProps, Table, TableBody, TableCell, TableColumn, TableHeader, TableProps, TableRow } from "@nextui-org/react";
 import { FC } from "react";
-import { removeUser, setStatus } from "@/lib/users/userActions";
+import { removeUser, setRole, setStatus } from "@/lib/users/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faLockOpen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 
-const statusColorMap: Record<"ACTIVE" | "BLOCKED", ChipProps["color"]> = {
+const statusColorMap: Record<IUser["status"], ChipProps["color"]> = {
   ACTIVE: "success",
   BLOCKED: "warning",
 };
@@ -37,9 +37,15 @@ const Actions: FC<ActionsProps> = ({ onLook, onBlock, onUnblock, onRemove }) => 
   </div>
 );
 
-const Status: FC<{ status: "ACTIVE" | "BLOCKED" }> = ({ status }) => (
+const Status: FC<{ status: IUser["status"] }> = ({ status }) => (
   <Chip color={statusColorMap[status]} size="sm" variant="flat">
     {status}
+  </Chip>
+);
+
+const Role: FC<{ role: IUser["role"]; onClick?: () => void }> = ({ role, onClick }) => (
+  <Chip className="cursor-pointer" size="sm" variant="flat" onClick={onClick}>
+    {role}
   </Chip>
 );
 
@@ -63,7 +69,9 @@ export default function UsersTable({ users, ...props }: UsersTableProps) {
           <TableRow key={id}>
             <TableCell>{name}</TableCell>
             <TableCell>{email}</TableCell>
-            <TableCell>{role}</TableCell>
+            <TableCell>
+              <Role role={role} onClick={() => setRole(id, role === "USER" ? "ADMIN" : "USER")} />
+            </TableCell>
             <TableCell>
               <Status status={status} />
             </TableCell>
