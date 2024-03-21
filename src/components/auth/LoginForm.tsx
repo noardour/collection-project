@@ -11,12 +11,24 @@ const LoginForm: FC = () => {
 
   return (
     <form action={dispatch} className="flex flex-col gap-4 xl:w-[75%]">
-      <Input label="Email" type="text" name="email" isInvalid={!!state?.errors?.email} errorMessage={state?.errors?.email} />
-      <Input label="Password" type="password" name="password" isInvalid={!!state?.errors?.password} errorMessage={state?.errors?.password} />
+      {state?.formErrors?.length ? <div className="text-danger mb-4 font-bold">{state?.formErrors.join(". ") + "."}</div> : undefined}
+      <Input
+        label="Email"
+        type="text"
+        name="email"
+        isInvalid={!!state?.fieldErrors?.email}
+        errorMessage={state?.fieldErrors?.email?.join(". ")?.concat(".")}
+      />
+      <Input
+        label="Password"
+        type="password"
+        name="password"
+        isInvalid={!!state?.fieldErrors?.password}
+        errorMessage={state?.fieldErrors?.password?.join(". ")?.concat(".")}
+      />
       <Button className="self-start" type="submit" color="primary">
         Log in
       </Button>
-      {state?.msg && <div>{state.msg}</div>}
     </form>
   );
 };

@@ -15,6 +15,7 @@ const loginSchema = z
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "No such User", path: ["email"] });
     if (user && user.password !== password) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Wrong password", path: ["password"] });
+    if (user && user.status === "BLOCKED") ctx.addIssue({ code: z.ZodIssueCode.custom, message: "This user is blocked" });
   });
 
 export function validateLogin(formData: FormData) {

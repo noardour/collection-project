@@ -10,21 +10,34 @@ const RegistrationForm: FC = () => {
 
   return (
     <form action={dispatch} className="flex flex-col gap-4 xl:w-[75%]">
-      <Input label="Name" type="text" name="name" isInvalid={!!state?.errors?.name} errorMessage={state?.errors?.name?.join(" ")} />
-      <Input label="Email" type="text" name="email" isInvalid={!!state?.errors?.email} errorMessage={state?.errors?.email?.join(" ")} />
+      {state?.formErrors?.length ? <div className="text-danger mb-4 font-bold">{state?.formErrors.join(". ") + "."}</div> : undefined}
+      <Input
+        label="Name"
+        type="text"
+        name="name"
+        isInvalid={!!state?.fieldErrors?.name}
+        errorMessage={state?.fieldErrors?.name?.join(". ").concat(".")}
+      />
+      <Input
+        label="Email"
+        type="text"
+        name="email"
+        isInvalid={!!state?.fieldErrors?.email}
+        errorMessage={state?.fieldErrors?.email?.join(". ").concat(".")}
+      />
       <Input
         label="Password"
         type="password"
         name="password"
-        isInvalid={!!state?.errors?.password}
-        errorMessage={state?.errors?.password?.join(" ")}
+        isInvalid={!!state?.fieldErrors?.password}
+        errorMessage={state?.fieldErrors?.password?.join(". ").concat(".")}
       />
       <Input
         label="Confirm password"
         type="password"
         name="confirm-password"
-        isInvalid={!!state?.errors?.confirmPassword}
-        errorMessage={state?.errors?.confirmPassword?.join(" ")}
+        isInvalid={!!state?.fieldErrors?.confirmPassword}
+        errorMessage={state?.fieldErrors?.confirmPassword?.join(". ").concat(".")}
       />
       <Button className="self-start" type="submit" color="primary">
         Register
