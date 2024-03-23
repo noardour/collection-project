@@ -9,4 +9,5 @@ export interface IUser {
   role: UserRole;
   status: UserStatus;
   createdAt: Date;
+  lastLoggedIn: Date;
 }

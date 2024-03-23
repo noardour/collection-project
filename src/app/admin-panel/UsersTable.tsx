@@ -7,6 +7,7 @@ import { removeUser, setRole, setStatus } from "@/lib/users/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faLockOpen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import Link from "next/link";
 
 const statusColorMap: Record<IUser["status"], ChipProps["color"]> = {
   ACTIVE: "success",
@@ -14,17 +15,19 @@ const statusColorMap: Record<IUser["status"], ChipProps["color"]> = {
 };
 
 interface ActionsProps {
-  onLook?: () => void;
+  lookHref: string;
   onBlock?: () => void;
   onUnblock?: () => void;
   onRemove?: () => void;
 }
 
-const Actions: FC<ActionsProps> = ({ onLook, onBlock, onUnblock, onRemove }) => (
+const Actions: FC<ActionsProps> = ({ lookHref, onBlock, onUnblock, onRemove }) => (
   <div className="relative flex items-center gap-2">
-    <span className="text-lg text-primary cursor-pointer active:opacity-50" onClick={onLook}>
-      <FontAwesomeIcon icon={faEye} />
-    </span>
+    <Link href={lookHref}>
+      <span className="text-lg text-primary cursor-pointer active:opacity-50">
+        <FontAwesomeIcon icon={faEye} />
+      </span>
+    </Link>
     <span className="text-lg text-warning cursor-pointer active:opacity-50" onClick={onBlock}>
       <FontAwesomeIcon icon={faLock} />
     </span>
@@ -78,7 +81,7 @@ export default function UsersTable({ users, ...props }: UsersTableProps) {
             <TableCell>{createdAt.toISOString()}</TableCell>
             <TableCell>
               <Actions
-                onLook={() => console.log(`look ${name}`)}
+                lookHref={`/user/${id}`}
                 onBlock={() => setStatus(id, "BLOCKED")}
                 onUnblock={() => setStatus(id, "ACTIVE")}
                 onRemove={() => removeUser(id)}
