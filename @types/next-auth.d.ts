@@ -4,6 +4,6 @@ import { DefaultJWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
-    user: Pick<IUser, "role"> & DefaultSession["user"];
+    user: Pick<IUser, "role" | "status"> & DefaultSession["user"];
   }
 }

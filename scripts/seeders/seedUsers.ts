@@ -11,6 +11,12 @@ const seedUsers = async () => {
       password: "1234",
       role: "ADMIN",
     })),
+    ...Array.from({ length: 5 }, (_, i) => ({
+      name: `Test${i}`,
+      email: `test${i}@test.com`,
+      password: "1234",
+      role: "USER",
+    })),
     ...Array.from({ length: 30 }, () => ({
       name: faker.person.fullName(),
       email: faker.internet.email(),
