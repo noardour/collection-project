@@ -8,7 +8,7 @@ const credentialsProvider: Provider = credentials({
   async authorize(credentials) {
     const { email, password } = credentials as { email: string; password: string };
     const user = await prisma.user.findUnique({ where: { email } });
-    if (user && user.password == password) return user;
+    if (user && user.password == password && user.status !== "BLOCKED") return user;
     return null;
   },
 });

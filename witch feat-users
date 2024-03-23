@@ -1,0 +1,29 @@
+[33m1d97ede[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Merge branch 'master' of https://github.com/noardour/collection-project
+[33m6e91867[m Merge pull request #2 from noardour/dev
+[33mb106ac6[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m Merge branch 'feat-users' into dev
+[33mcce1657[m[33m ([m[1;32mfeat-users[m[33m)[m Merge branch 'feat-users-auth' into feat-users
+[33m234d62b[m[33m ([m[1;32mfeat-users-auth[m[33m)[m add user authentication and authorization
+[33mb1f6edd[m add 404 error page
+[33m7e5f4d6[m Merge branch 'feat-users-validation' into feat-users
+[33ma53c5b5[m add registration validation
+[33m5646f33[m refactor login validation
+[33mccf1614[m connect database
+[33mdd93749[m add basic preloader
+[33m8871771[m Merge branch 'dev'
+[33mfcdab45[m Merge branch 'feat-prisma' into dev
+[33maf942ab[m create users seeder
+[33m3aa74c0[m create users table
+[33m2ceb308[m install prisma
+[33m4fb0637[m Merge branch 'feat-users' into dev
+[33mdc19896[m Merge branch 'feat-admin-page-template' into feat-users
+[33mae2d855[m add admin page template
+[33m51eff7d[m add user page template
+[33m3137ad1[m Merge branch 'feat-users-registration-page' into feat-users
+[33m2011c92[m add registration page
+[33m864e4b5[m move component
+[33mf1bb98d[m Merge branch 'feat-users-login-page' into feat-users
+[33m3c32073[m add login page
+[33m7a363de[m Merge branch 'feat-next-ui' into dev
+[33m395475e[m install next ui, create Header using next ui components
+[33ma709c49[m initial commit
+[33mc44a8fe[m Initial commit from Create Next App

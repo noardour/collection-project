@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client/edge";
 import z from "zod";
 
 const prisma = new PrismaClient();
@@ -19,10 +19,10 @@ async function nameUnique(name: string) {
 
 const registrationSchema = z
   .object({
-    name: z.string().min(2).max(60).refine(nameUnique, "User with this name is already registered"),
+    name: z.string().min(1).max(60).refine(nameUnique, "User with this name is already registered"),
     email: z.string().min(1, "Email is required").email().refine(emailUnique, "User with this email is already regisred"),
     password: z.string().min(4).max(30),
-    confirmPassword: z.string().min(1),
+    confirmPassword: z.string().min(1, "Field is required"),
   })
   .refine(
     (values) => {
