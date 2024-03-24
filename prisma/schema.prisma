@@ -26,8 +26,48 @@ model User {
   status       Status   @default(ACTIVE)
   role         Role     @default(USER)
   lastLoggedIn DateTime @default(now()) @map(name: "last-logged-in")
-  createdAt    DateTime @default(now()) @map(name: "created_at")
-  updatedAt    DateTime @updatedAt @map(name: "updated_at")
+
+  collections Collection[]
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   @@map(name: "users")
+}
+
+enum CollectionCategories {
+  MOVEIS
+  MUSICAL_ALBUMS
+  BOOKS
+  PAINTINGS
+  MONETS
+  CARS
+  COINS
+  OTHER
+}
+
+model Collection {
+  id          String               @id @default(uuid())
+  title       String
+  description String               @db.Text
+  category    CollectionCategories
+  image       String?
+
+  items Item[]
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String @map(name: "user_id")
+
+  @@map(name: "collections")
+}
+
+model Item {
+  id    String @id @default(uuid())
+  title String
+  image String
+
+  Collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String     @map(name: "collection_id")
+
+  @@map(name: "items")
 }
