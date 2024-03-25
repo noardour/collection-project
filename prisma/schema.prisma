@@ -40,7 +40,6 @@ enum CollectionCategories {
   MUSICAL_ALBUMS
   BOOKS
   PAINTINGS
-  MONETS
   CARS
   COINS
   OTHER
@@ -52,6 +51,8 @@ model Collection {
   description String               @db.Text
   category    CollectionCategories
   image       String?
+  createdAt   DateTime             @default(now()) @map(name: "created_at")
+  updatedAt   DateTime             @updatedAt @map(name: "updated_at")
 
   items Item[]
 
@@ -62,9 +63,11 @@ model Collection {
 }
 
 model Item {
-  id    String @id @default(uuid())
-  title String
-  image String
+  id        String   @id @default(uuid())
+  title     String
+  image     String
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   Collection   Collection @relation(fields: [collectionId], references: [id])
   collectionId String     @map(name: "collection_id")
