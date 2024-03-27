@@ -10,5 +10,8 @@ export async function fetchUsers(): Promise<IUser[]> {
 }
 
 export async function fetchUser(id: IUser["id"]) {
-  return await prisma.user.findUnique({ where: { id } });
+  return await prisma.user.findUnique({
+    where: { id },
+    include: { collections: { include: { items: true } } },
+  });
 }

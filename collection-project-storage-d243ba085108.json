@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "collection-project-storage",
+  "private_key_id": "d243ba0851084953ff32b2255a89dcb6e6b06804",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCPx38sM5INlWTJ\nxXUKc6cmIiO2XFR60E73Bwh7D6GCVhkcJ0g8Ve8wDlzAWbZgzlfVqTm6O/GxbR21\nXmjrOhV6HNgQAZcKhtmWMGylYMV/H0Rqn1uIrizGkh9V1hVwrcqRnscZ6iJQQktm\nMt0d3W9a+HRDtoc+xGIX6qYH9ebjiUEUO968xfCV+PpeQNbmj1h4Dq15EJqOAaig\ng5qHzoRT0mxUawi6IjSHo2TZsgazFCxOSRGdLjLYX91maTm+QvK74RTDYhP8T0Jt\nWViBl+IHkgkSA7JlWrG+/7o4a+VOy5lfb2TPf7g/COJDEoWgmZCeRETn4C/U/34C\n8dEwcyFxAgMBAAECggEACSmZCVz89v14/OG8NcRigmvaXkNFL/FpQtVG0ql6QlHQ\ndlVA2srNfBYXjjt5WPMgBlHrMkV31MsjwZyIr6ArNmBdsCwbGb+NC1o+e43ZRXgI\nNl+S5/jU33pNjGe2RJC9Wr56qNmyl5jt8KSXp5D7s8P8YW9MRZv4C1b3qdoKEssN\nLBfq08e3xLtc0JnujipfmFbYncMDLotCiG8tz0BAFztTd1n7iISI7xOskSZQeqin\nmb5NCSMwNhRz+faO7cZSIQCJrUOclDd33xjVd3eL75VLcznJ3sE1j48EF5R8xww8\nSAfAfHyxkSSsOS/72/0gMxIb8uoStyEZQZutZdMAxQKBgQDGrVOVld93qc19XW5r\n/N2B4xjmt+G1YGnt6BgRUvwi+YfnHCA+zKfRottRtws0bk/8VZPFkbngEs80Nu1m\nKMU5WZQxnWYe4fk8Jz0zbtCNNFkuD0gXDMIP+LfvEsGiUpSMjb1mktyNSexpZWtG\nN1KsxorZlrURPfsgkG2A8EQ39QKBgQC5Q1BpvUnkdILNaUQx5BCbbtehpKWYKR3T\ng17GxIh0w64pQQJ19ihWtZD8YS0iehDT9M/Ka+6BwnG3zgPRzm43iG/gbX6YWzsa\n1Gryp2BDE66FvvMiuNUCmLJWkgxAwYXU7QgRW2HEIyp/LX/0J/N1feAQw+i+IJp+\nEJrRtX7iDQKBgQDFvYVPgJemNi77854PhOHCgRErsSDIsWk9DJ/HvlyNQuZss6W0\nW2U8VWcMca6JRLH/Z/1nyp7B0nbAdVrbLwD9D5dbulkFq8uwfy1+n3Ca2dtY6ITL\nzDrqQpZvMK/gq2iGbBxylwFE7qqKTBL1E+MJa6KO5lzZCGOGCbmzd2+ucQKBgA3H\nLdHPXBF7gMbaD1JOjdWhdrP01MPuOuOiH4hU0XktnGRBC3fOaM2aD0BV0c+AmIPK\n7zE0ubY4ydBLqAkQey3yHa/pNMML9edW6OVHAWe7rP0RaG+qo1zgElNR5UtjmRpu\nzmzMCQdXPi/bKGr2FaslQ2a7yzFop1S802bJQrh5AoGABtq/9RTxUyR3LPBPQt6C\nTthjaazY6j18mI4VH+KwxfLrpLV5DB037AWwyeAWm2MylIYyVE89kcJgDEZ1mDhy\n4lO2boSOxuKp8de4tkAEIn7nZzRT/s6CWdAS/M/3/uKuhDJz/TGxvcgJ80N25V48\n12rjtB8tShUYjVTb2gJYSeU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "collectionprojectstorage@collection-project-storage.iam.gserviceaccount.com",
+  "client_id": "105912953889039158177",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/collectionprojectstorage%40collection-project-storage.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -3,6 +3,7 @@
 import { IUser } from "@/types/IUser";
 import { Tab, Tabs } from "@nextui-org/react";
 import UserInfo from "./UserInfo";
+import CollectionsList from "./CollectionsList";
 
 interface UserDisplayProps {
   user: IUser;
@@ -22,9 +23,7 @@ export default function UserDisplay({ user }: UserDisplayProps) {
           <UserInfo user={user} />
         </Tab>
         <Tab key="collections" title="Users collections">
-          <div>
-            <h2 className="text-xl font-bold mb-6">Collections</h2>
-          </div>
+          <CollectionsList collections={user.collections} />
         </Tab>
       </Tabs>
     </div>
