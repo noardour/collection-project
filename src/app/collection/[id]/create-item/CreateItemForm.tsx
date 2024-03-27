@@ -14,7 +14,7 @@ export default function CreateItemForm({ collectionId }: CreateItemFormProps) {
   const [state, dispatch] = useFormState(create, undefined);
 
   return (
-    <form className="flex flex-col gap-4" action={dispatch} encType="multipart/form-data/">
+    <form className="flex flex-col gap-4" action={dispatch}>
       {state?.formErrors?.length ? <div className="text-danger mb-4 font-bold">{state?.formErrors.join(". ") + "."}</div> : undefined}
       <input type="hidden" name="collection-id" value={collectionId} />
 

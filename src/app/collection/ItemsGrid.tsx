@@ -4,7 +4,8 @@ import { remove } from "@/lib/items/ItemsActions";
 import { IItem } from "@/types/IItem";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import Image from "next/image";
 import { FC } from "react";
 
 interface ActionsProps {
@@ -23,28 +24,26 @@ const Actions: FC<ActionsProps> = ({ onRemove, onEdit }) => (
   </div>
 );
 
-interface ItemsTableProps {
+interface ItemsGridProps {
   items: IItem[];
 }
 
-const ItemsTable: FC<ItemsTableProps> = ({ items }) => (
-  <Table>
-    <TableHeader>
-      <TableColumn>Title</TableColumn>
-      <TableColumn>Actions</TableColumn>
-    </TableHeader>
-    <TableBody>
-      {items.map((item) => (
-        <TableRow key={item.id}>
-          <TableCell>{item.title}</TableCell>
-          <TableCell width={200}>
-            <Actions onEdit={() => console.log(`edit ${item.id}`)} onRemove={() => remove(item.id)} />
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-    {}
-  </Table>
+const ItemsGrid: FC<ItemsGridProps> = ({ items }) => (
+  <div className="flex gap-4">
+    {items.map((item) => (
+      <Card key={item.id}>
+        <CardHeader>
+          <Image width={200} height={150} src={item.image} alt="items image" />
+        </CardHeader>
+        <CardBody className="p-2 flex flex-col">
+          <div className="font-bold">{item.title}</div>
+          <div className="self-end mt-auto">
+            <Actions onRemove={() => remove(item.id)} />
+          </div>
+        </CardBody>
+      </Card>
+    ))}
+  </div>
 );
 
-export default ItemsTable;
+export default ItemsGrid;
