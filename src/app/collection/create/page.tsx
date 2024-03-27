@@ -1,5 +1,3 @@
-import { CollectionCategory } from "@/types/ICollection";
-import { Input, Select, SelectItem, Textarea } from "@nextui-org/react";
 import CreateCollectionForm from "./CreateCollectionForm";
 
 export default function Page() {

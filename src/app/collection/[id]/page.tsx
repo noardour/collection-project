@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ItemsTable from "../ItemsTable";
 import auth from "@/middleware";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 
 interface PageProps {
   params: {
@@ -29,7 +30,9 @@ export default async function Page({ params }: PageProps) {
       <ItemsTable items={collection.items} />
       {collection.userId === session?.user.id ? (
         <div className="pt-4">
-          <Button color="primary">Add Item</Button>
+          <Link href={`/collection/${collection.id}/create-item`}>
+            <Button color="primary">Add Item</Button>
+          </Link>
         </div>
       ) : (
         ""
