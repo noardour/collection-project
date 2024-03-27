@@ -11,7 +11,7 @@ export const getGCPCredentials = () => {
         projectId: process.env.GCP_PROJECT_ID,
       }
     : // for local development, use gcloud CLI
-      {};
+      { projectId: process.env.STORAGE_PROJECT_ID, keyFilename: process.env.KEY_FILENAME };
 };
 
 const storage = new Storage(getGCPCredentials());
