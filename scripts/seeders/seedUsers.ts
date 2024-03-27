@@ -17,7 +17,7 @@ const seedUsers = async () => {
       password: "1234",
       role: "USER",
     })),
-    ...Array.from({ length: 30 }, () => ({
+    ...Array.from({ length: 10 }, () => ({
       name: faker.person.fullName(),
       email: faker.internet.email(),
       password: "1234",

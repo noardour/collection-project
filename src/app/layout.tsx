@@ -26,7 +26,7 @@ export default function RootLayout({
         <Providers>
           <div className="text-foreground bg-background min-h-screen">
             <Header />
-            <div className="relative container max-w-7xl mx-auto px-6 pt-10">{children}</div>
+            <div className="relative container max-w-7xl mx-auto px-6 pt-10 pb-40">{children}</div>
           </div>
         </Providers>
       </body>

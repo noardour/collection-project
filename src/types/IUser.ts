@@ -1,3 +1,5 @@
+import { ICollection } from "./ICollection";
+
 export type UserRole = "USER" | "ADMIN";
 
 export type UserStatus = "ACTIVE" | "BLOCKED";
@@ -10,4 +12,5 @@ export interface IUser {
   status: UserStatus;
   createdAt: Date;
   lastLoggedIn: Date;
+  collections?: ICollection[];
 }
