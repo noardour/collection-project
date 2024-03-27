@@ -8,37 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faLockOpen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
+import Actions from "@/components/Actions";
 
 const statusColorMap: Record<IUser["status"], ChipProps["color"]> = {
   ACTIVE: "success",
   BLOCKED: "warning",
 };
-
-interface ActionsProps {
-  lookHref: string;
-  onBlock?: () => void;
-  onUnblock?: () => void;
-  onRemove?: () => void;
-}
-
-const Actions: FC<ActionsProps> = ({ lookHref, onBlock, onUnblock, onRemove }) => (
-  <div className="relative flex items-center gap-2">
-    <Link href={lookHref}>
-      <span className="text-lg text-primary cursor-pointer active:opacity-50">
-        <FontAwesomeIcon icon={faEye} />
-      </span>
-    </Link>
-    <span className="text-lg text-warning cursor-pointer active:opacity-50" onClick={onBlock}>
-      <FontAwesomeIcon icon={faLock} />
-    </span>
-    <span className="text-lg text-warning cursor-pointer active:opacity-50" onClick={onUnblock}>
-      <FontAwesomeIcon icon={faLockOpen} />
-    </span>
-    <span className="text-lg text-danger cursor-pointer active:opacity-50" onClick={onRemove}>
-      <FontAwesomeIcon icon={faTrashCan} />
-    </span>
-  </div>
-);
 
 const Status: FC<{ status: IUser["status"] }> = ({ status }) => (
   <Chip color={statusColorMap[status]} size="sm" variant="flat">
