@@ -19,11 +19,11 @@ export default function UserDisplay({ user }: UserDisplayProps) {
       {user.status === "BLOCKED" && <div className="mb-4 text-danger">This user is blocked!</div>}
 
       <Tabs>
-        <Tab key="info" title="User Information">
-          <UserInfo user={user} />
-        </Tab>
         <Tab key="collections" title="Users collections">
           <CollectionsList collections={user.collections} />
+        </Tab>
+        <Tab key="info" title="User Information">
+          <UserInfo user={user} />
         </Tab>
       </Tabs>
     </div>

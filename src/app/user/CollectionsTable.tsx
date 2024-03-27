@@ -1,3 +1,6 @@
+"use client";
+
+import Actions from "@/components/Actions";
 import { remove } from "@/lib/collections/collectionActions";
 import { ICollection } from "@/types/ICollection";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
@@ -6,24 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import Link from "next/link";
 import { FC } from "react";
-
-interface ActionsProps {
-  lookHref: string;
-  onRemove?: () => void;
-}
-
-const Actions: FC<ActionsProps> = ({ lookHref, onRemove }) => (
-  <div className="relative flex items-center gap-2">
-    <Link href={lookHref}>
-      <span className="text-lg text-primary cursor-pointer active:opacity-50">
-        <FontAwesomeIcon icon={faEye} />
-      </span>
-    </Link>
-    <span className="text-lg text-danger cursor-pointer active:opacity-50" onClick={onRemove}>
-      <FontAwesomeIcon icon={faTrashCan} />
-    </span>
-  </div>
-);
 
 interface CollectionsTableProps {
   collections?: ICollection[];
