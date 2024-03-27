@@ -21,7 +21,7 @@ export default function ImageInput({ name }: ImageInputProps) {
     }
   };
 
-  const handleDrop: DragEventHandler<HTMLDivElement> = (e) => {
+  const handleDrop: DragEventHandler<HTMLLabelElement> = (e) => {
     e.preventDefault();
     console.log(e.dataTransfer.files[0].type);
     if (input.current) {
@@ -32,7 +32,7 @@ export default function ImageInput({ name }: ImageInputProps) {
   };
 
   return (
-    <div
+    <label
       onDragEnter={() => setDragingOver(true)}
       onDragLeave={() => setDragingOver(false)}
       onDragOver={(e) => e.preventDefault()}
@@ -54,6 +54,6 @@ export default function ImageInput({ name }: ImageInputProps) {
         {image && <Image src={image} className="absolute top-0 left-0" alt="chosen image" fill={true} />}
       </div>
       <input type="file" name={name} onChange={handleChange} hidden ref={input} />
-    </div>
+    </label>
   );
 }
