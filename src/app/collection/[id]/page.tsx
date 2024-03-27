@@ -24,8 +24,8 @@ export default async function Page({ params }: PageProps) {
         <div>category:</div>
         <div>{collection.category}</div>
       </div>
-      <div className="mb-4">
-        <div className="hidden md:block w-full h-[420px] bg-gray-700" />
+      <div className="relative w-full h-[600px] overflow-hidden">
+        <Image src={collection.image as string} alt="collection image" fill className="object-cover" />
       </div>
       <div className="mb-8">{collection.description}</div>
       {/* <ItemsTable items={collection.items} /> */}

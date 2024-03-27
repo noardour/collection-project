@@ -1,3 +1,4 @@
+import { remove } from "@/lib/collections/collectionActions";
 import { ICollection } from "@/types/ICollection";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -45,7 +46,7 @@ const CollectionsTable: FC<CollectionsTableProps> = ({ collections }) => {
                 <TableCell>{collection.category}</TableCell>
                 <TableCell>{collection.items.length}</TableCell>
                 <TableCell>
-                  <Actions lookHref={`/collection/${collection.id}`} onRemove={() => console.log(`remove ${collection.id}`)} />
+                  <Actions lookHref={`/collection/${collection.id}`} onRemove={() => remove(collection.id)} />
                 </TableCell>
               </TableRow>
             ))
