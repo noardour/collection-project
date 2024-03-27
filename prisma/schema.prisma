@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("PRISMA_ACCELERATE_URL")
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 enum Status {
@@ -56,7 +56,7 @@ model Collection {
 
   items Item[]
 
-  User   User   @relation(fields: [userId], references: [id])
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @map(name: "user_id")
 
   @@map(name: "collections")
@@ -69,7 +69,7 @@ model Item {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
 
-  Collection   Collection @relation(fields: [collectionId], references: [id])
+  Collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId String     @map(name: "collection_id")
 
   @@map(name: "items")
