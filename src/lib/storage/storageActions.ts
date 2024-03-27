@@ -18,6 +18,8 @@ const storage = new Storage(getGCPCredentials());
 
 export async function uploadFile(file: File, fileOutputName: string) {
   try {
+    console.log(getGCPCredentials());
+    console.log(await storage.bucket(process.env.BUCKET_NAME as string).exists());
     const storageFile = storage.bucket(process.env.BUCKET_NAME as string).file(fileOutputName);
     await storageFile.save(Buffer.from(await file.arrayBuffer()));
     return storageFile.publicUrl();
