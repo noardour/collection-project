@@ -26,6 +26,7 @@ export async function create(prevState: ItemCreateState, formData: FormData): Pr
     return { fieldErrors: validatedFields.error.flatten().fieldErrors, formErrors: validatedFields.error.flatten().formErrors };
   const storageFilePath = await uploadFile(validatedFields.data.image, `items/${randomUUID()}_${validatedFields.data.image.name}`);
   await prisma.item.create({ data: { ...validatedFields.data, image: storageFilePath as string } });
+  revalidatePath(`/collection/`);
   redirect(`/collection/${validatedFields.data.collectionId}`);
 }
 

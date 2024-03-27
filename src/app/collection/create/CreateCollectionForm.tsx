@@ -1,5 +1,6 @@
 "use client";
 
+import ImageInput from "@/components/ImageInput";
 import { create } from "@/lib/collections/collectionActions";
 import { CollectionCategory } from "@/types/ICollection";
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
@@ -13,7 +14,8 @@ export default function CreateCollectionForm() {
   return (
     <form className="flex flex-col gap-4" action={dispatch}>
       {state?.formErrors?.length ? <div className="text-danger mb-4 font-bold">{state?.formErrors.join(". ") + "."}</div> : undefined}
-      <div className="bg-gray-600 w-[400px] h-[200px]"></div>
+      <ImageInput name="image" />
+      {!!state?.fieldErrors?.image && <div className="text-danger">{state?.fieldErrors?.image?.join(". ").concat(".")}</div>}
       <Input
         label="Title"
         name="title"
