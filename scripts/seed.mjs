@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import seedUsers from "./seeders/seedUsers";
-import seedCollections from "./seeders/seedCollections";
+import seedUsers from "./seeders/seedUsers.mjs";
+import seedCollections from "./seeders/seedCollections.mjs";
 
 const prisma = new PrismaClient();
 
