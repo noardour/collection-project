@@ -22,7 +22,7 @@
     },
     "downlevelIteration": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "scripts/seeders/seedCollections.mjs", "scripts/seed.mjs", "scripts/seeders/seedUsers.mjs"],
   "exclude": ["node_modules"],
   
 }

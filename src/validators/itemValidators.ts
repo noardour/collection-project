@@ -14,12 +14,15 @@ const createSchema = z.object({
     }, "File must be an image"),
   title: z.string().min(1, "Field is required"),
   collectionId: z.string().min(1, "Field is required"),
+  tags: z.array(z.string()),
 });
 
 export function validateItemCreate(formData: FormData) {
+  console.log((formData.get("tags") as string).split(" "));
   return createSchema.safeParse({
     image: formData.get("image"),
     title: formData.get("title"),
     collectionId: formData.get("collection-id"),
+    tags: (formData.get("tags") as string).split(" "),
   });
 }

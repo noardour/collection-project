@@ -27,6 +27,13 @@ export default function CreateItemForm({ collectionId }: CreateItemFormProps) {
         isInvalid={!!state?.fieldErrors?.title}
         errorMessage={state?.fieldErrors?.title?.join(". ").concat(".")}
       />
+      <Input
+        label="Tags"
+        name="tags"
+        type="text"
+        isInvalid={!!state?.fieldErrors?.tags}
+        errorMessage={state?.fieldErrors?.tags?.join(". ").concat(".")}
+      />
       <Button className="self-start" color="primary" type="submit">
         Create
       </Button>
