@@ -2,6 +2,7 @@ import { Storage } from "@google-cloud/storage";
 
 console.log(process.env.GCP_PROJECT_ID);
 console.log(process.env.GCP_PRIVATE_KEY);
+console.log(process.env.GOOGLE_PRIVATE_KEY);
 
 export const getGCPCredentials = () => {
   // for Vercel, use environment variables
