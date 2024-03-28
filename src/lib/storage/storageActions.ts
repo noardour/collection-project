@@ -1,17 +1,12 @@
 import { Storage } from "@google-cloud/storage";
 
-console.log(process.env.GCP_PROJECT_ID);
-console.log(process.env.GCP_PRIVATE_KEY);
-console.log(process.env.GOOGLE_PRIVATE_KEY);
-console.log(process.env.PRIVATE_KEY);
-
 export const getGCPCredentials = () => {
   // for Vercel, use environment variables
   return process.env.GCP_PRIVATE_KEY
     ? {
         credentials: {
           client_email: process.env.GCP_SERVICE_ACCOUNT_EMAIL,
-          private_key: process.env.GCP_PRIVATE_KEY,
+          private_key: process.env.GCS_PRIVATE_KEY?.split(String.raw`\n`).join("\n"),
         },
         projectId: process.env.GCP_PROJECT_ID,
       }
@@ -23,10 +18,10 @@ const storage = new Storage(getGCPCredentials());
 
 export async function uploadFile(file: File, fileOutputName: string) {
   try {
-    console.log(getGCPCredentials());
-    console.log(await storage.bucket(process.env.BUCKET_NAME as string).exists());
     const storageFile = storage.bucket(process.env.BUCKET_NAME as string).file(fileOutputName);
+    console.log("pre save");
     await storageFile.save(Buffer.from(await file.arrayBuffer()));
+    console.log("post save");
     return storageFile.publicUrl();
   } catch (err) {
     console.log(`File upload error: ${err}`);
