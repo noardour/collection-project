@@ -72,5 +72,16 @@ model Item {
   Collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId String     @map(name: "collection_id")
 
+  tags Tag[]
+
   @@map(name: "items")
+}
+
+model Tag {
+  id    String @id @default(uuid())
+  title String @unique
+
+  items Item[]
+
+  @@map(name: "tags")
 }
