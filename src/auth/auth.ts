@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 
 export const { auth, signIn, signOut } = NextAuth({
   providers: [creditailProvider],
+  trustHost: true,
   pages: {
     signIn: "/login",
     signOut: "/logout",
