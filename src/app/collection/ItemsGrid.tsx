@@ -2,6 +2,7 @@
 
 import Actions from "@/components/Actions";
 import { remove } from "@/lib/items/ItemsActions";
+import { ICollection } from "@/types/ICollection";
 import { IItem } from "@/types/IItem";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,7 +24,7 @@ const ItemsGrid: FC<ItemsGridProps> = ({ items }) => (
         <CardBody className="p-2 flex flex-col">
           <div className="font-bold">{item.title}</div>
           <div className="self-end mt-auto">
-            <Actions editHref="/" onRemove={() => remove(item.id)} />
+            <Actions editHref={`/collection/edit-item/${item.id}`} onRemove={() => remove(item.id)} />
           </div>
         </CardBody>
       </Card>

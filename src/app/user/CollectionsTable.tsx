@@ -31,7 +31,11 @@ const CollectionsTable: FC<CollectionsTableProps> = ({ collections }) => {
                 <TableCell>{collection.category}</TableCell>
                 <TableCell>{collection.items.length}</TableCell>
                 <TableCell>
-                  <Actions lookHref={`/collection/${collection.id}`} onRemove={() => remove(collection.id)} />
+                  <Actions
+                    lookHref={`/collection/${collection.id}`}
+                    editHref={`/collection/${collection.id}/edit`}
+                    onRemove={() => remove(collection.id)}
+                  />
                 </TableCell>
               </TableRow>
             ))
