@@ -14,15 +14,34 @@ const createSchema = z.object({
     }, "File must be an image"),
   title: z.string().min(1, "Field is required"),
   collectionId: z.string().min(1, "Field is required"),
-  tags: z.array(z.string()),
 });
 
 export function validateItemCreate(formData: FormData) {
-  console.log((formData.get("tags") as string).split(" "));
   return createSchema.safeParse({
     image: formData.get("image"),
     title: formData.get("title"),
     collectionId: formData.get("collection-id"),
-    tags: (formData.get("tags") as string).split(" "),
+  });
+}
+
+const editSchema = z.object({
+  image: z
+    .instanceof(File)
+    .transform((file) => (file.size === 0 ? undefined : file))
+    .refine((file) => {
+      if (!file) return true;
+      return file.size <= MAX_UPLOAD_SIZE;
+    }, "File size must be less than 20MB")
+    .refine((file) => {
+      if (!file) return true;
+      return ACCEPTED_FILE_TYPES.includes(file.type);
+    }, "File must be an image"),
+  title: z.string().min(1, "Field is required"),
+});
+
+export function validateItemEdit(formData: FormData) {
+  return editSchema.safeParse({
+    image: formData.get("image"),
+    title: formData.get("title"),
   });
 }

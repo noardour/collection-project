@@ -2,6 +2,7 @@
 
 import Actions from "@/components/Actions";
 import { remove } from "@/lib/items/ItemsActions";
+import { ICollection } from "@/types/ICollection";
 import { IItem } from "@/types/IItem";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,24 +12,29 @@ import { FC } from "react";
 
 interface ItemsGridProps {
   items: IItem[];
+  withActions?: boolean;
 }
 
-const ItemsGrid: FC<ItemsGridProps> = ({ items }) => (
-  <div className="flex gap-4">
-    {items.map((item) => (
-      <Card key={item.id}>
-        <CardHeader>
-          <Image width={200} height={150} src={item.image} alt="items image" />
-        </CardHeader>
-        <CardBody className="p-2 flex flex-col">
-          <div className="font-bold">{item.title}</div>
-          <div className="self-end mt-auto">
-            <Actions editHref="/" onRemove={() => remove(item.id)} />
-          </div>
-        </CardBody>
-      </Card>
-    ))}
-  </div>
-);
+const ItemsGrid: FC<ItemsGridProps> = ({ items, withActions }) => {
+  return (
+    <div className="flex flex-wrap gap-4">
+      {items.map((item) => (
+        <Card key={item.id}>
+          <CardHeader>
+            <Image width={200} height={150} src={item.image} alt="items image" />
+          </CardHeader>
+          <CardBody className="p-2 flex flex-col">
+            <div className="font-bold">{item.title}</div>
+            {withActions && (
+              <div className="self-end mt-auto">
+                <Actions editHref={`/collection/edit-item/${item.id}`} onRemove={() => remove(item.id)} />
+              </div>
+            )}
+          </CardBody>
+        </Card>
+      ))}
+    </div>
+  );
+};
 
 export default ItemsGrid;

@@ -27,7 +27,7 @@ const UserBar: FC<UserBarProps> = ({ id, name, role }) => {
   return (
     <>
       <div>
-        Добро пожаловать <Link href={`/user/${id}`}>{name}</Link>
+        Welcome, <Link href={`/user/${id}`}>{name}</Link>
       </div>
       <form
         action={async () => {

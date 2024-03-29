@@ -16,14 +16,12 @@ export default function ImageInput({ name }: ImageInputProps) {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const files = e.target.files;
     if (files) {
-      console.log(files);
       setImage(URL.createObjectURL(files[0]));
     }
   };
 
   const handleDrop: DragEventHandler<HTMLLabelElement> = (e) => {
     e.preventDefault();
-    console.log(e.dataTransfer.files[0].type);
     if (input.current) {
       input.current.files = e.dataTransfer.files;
       setImage(URL.createObjectURL(input.current.files[0]));

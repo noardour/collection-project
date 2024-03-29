@@ -12,11 +12,11 @@ export default async function LatestCollections() {
       <div className="flex flex-col gap-8">
         {collections.map((collection) => (
           <div key={collection.id}>
-            <div className="text-2xl font-bold">{collection.title}</div>
-            <div className="flex gap-1">
+            <div className="flex gap-8">
               {collection.image && <Image src={collection.image} alt="collection image" width={400} height={200} />}
               <div className="flex-1 flex flex-col items-start gap-2">
-                <div className="flex gap-2 text-default-400 text-sm">
+                <div className="text-2xl font-bold">{collection.title}</div>
+                <div className="flex gap-2 text-default-400 text-sm mb-4">
                   <div>category:</div>
                   <div>{collection.category}</div>
                 </div>

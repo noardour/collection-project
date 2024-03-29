@@ -1,7 +1,5 @@
 import { Storage } from "@google-cloud/storage";
 
-console.log(process.env.GCP_PRIVATE_KEY);
-
 export const getGCPCredentials = () => {
   // for Vercel, use environment variables
   return process.env.GCP_PRIVATE_KEY
@@ -33,8 +31,9 @@ export async function removeFile(fileStoragePath: string) {
   if (process.env.NODE_ENV === "production") return;
   const urlMatch = fileStoragePath.match(/^https:\/\/storage\.googleapis\.com\/([^\/]+)\/(.+)$/);
   const filePath = decodeURIComponent((urlMatch && urlMatch[2]) as string);
-  await storage
-    .bucket(process.env.BUCKET_NAME as string)
-    .file(filePath as string)
-    .delete();
+  const file = storage.bucket(process.env.BUCKET_NAME as string).file(filePath as string);
+  console.log((await file.exists()).pop());
+  if ((await file.exists()).pop()) {
+    await file.delete();
+  }
 }

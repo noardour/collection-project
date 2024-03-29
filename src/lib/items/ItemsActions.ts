@@ -1,13 +1,12 @@
 "use server";
 
-import { validateItemCreate } from "@/validators/itemValidators";
+import { validateItemCreate, validateItemEdit } from "@/validators/itemValidators";
 import { PrismaClient } from "@prisma/client";
 import { removeFile, uploadFile } from "../storage/storageActions";
 import { randomUUID } from "crypto";
 import { redirect } from "next/navigation";
 import { IItem } from "@/types/IItem";
 import { revalidatePath } from "next/cache";
-import { Router } from "next/router";
 const prisma = new PrismaClient();
 
 export type ItemCreateState =
@@ -16,7 +15,6 @@ export type ItemCreateState =
       fieldErrors?: {
         image?: string[];
         title?: string[];
-        tags?: string[];
       };
     }
   | undefined;
@@ -26,15 +24,32 @@ export async function create(prevState: ItemCreateState, formData: FormData): Pr
   if (!validatedFields.success)
     return { fieldErrors: validatedFields.error.flatten().fieldErrors, formErrors: validatedFields.error.flatten().formErrors };
   const storageFilePath = await uploadFile(validatedFields.data.image, `items/${randomUUID()}_${validatedFields.data.image.name}`);
-  const { tags, ...data } = validatedFields.data;
   await prisma.item.create({
     data: {
-      ...data,
+      ...validatedFields.data,
       image: storageFilePath as string,
     },
   });
   revalidatePath(`/collection/`);
   redirect(`/collection/${validatedFields.data.collectionId}`);
+}
+
+export async function edit(prevState: ItemCreateState, formData: FormData): Promise<ItemCreateState> {
+  const oldItem = await prisma.item.findUniqueOrThrow({ where: { id: formData.get("item_id") as string } });
+  const validatedFields = validateItemEdit(formData);
+  if (!validatedFields.success)
+    return { fieldErrors: validatedFields.error.flatten().fieldErrors, formErrors: validatedFields.error.flatten().formErrors };
+  let newStorageFilePath: string | undefined;
+  if (validatedFields.data.image) {
+    await removeFile(oldItem.image);
+    newStorageFilePath = (await uploadFile(validatedFields.data.image, `items/${randomUUID()}_${validatedFields.data.image.name}`)) as string;
+  }
+  await prisma.item.update({
+    where: { id: oldItem.id },
+    data: { ...validatedFields.data, image: newStorageFilePath || oldItem.image },
+  });
+  revalidatePath(`/collection/`);
+  redirect(`/collection/${oldItem.collectionId}`);
 }
 
 export async function remove(id: IItem["id"]) {

@@ -27,3 +27,29 @@ export function validateCollectionCreate(formData: FormData) {
     description: formData.get("description"),
   });
 }
+
+const editSchema = z.object({
+  image: z
+    .instanceof(File)
+    .transform((file) => (file.size === 0 ? undefined : file))
+    .refine((file) => {
+      if (!file) return true;
+      return !file || file.size <= MAX_UPLOAD_SIZE;
+    }, "File size must be less than 20MB")
+    .refine((file) => {
+      if (!file) return true;
+      return ACCEPTED_FILE_TYPES.includes(file.type);
+    }, "File must be an image"),
+  title: z.string().min(1, "Field is required"),
+  category: z.enum([collectionCategories[0], ...collectionCategories]),
+  description: z.string().min(1, "Field is required").max(3000),
+});
+
+export function validateCollectionEdit(formData: FormData) {
+  return editSchema.safeParse({
+    image: formData.get("image"),
+    title: formData.get("title"),
+    category: formData.get("category"),
+    description: formData.get("description"),
+  });
+}
