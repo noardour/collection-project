@@ -2,7 +2,7 @@ import { fetchCollection } from "@/lib/collections/colllectionData";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import auth from "@/middleware";
-import { Button } from "@nextui-org/react";
+import { Button, Link as UILink } from "@nextui-org/react";
 import Link from "next/link";
 import ItemsGrid from "../ItemsGrid";
 import Actions from "@/components/Actions";
@@ -33,6 +33,12 @@ export default async function Page({ params }: PageProps) {
         <div>category:</div>
         <div>{collection.category}</div>
       </div>
+      <div className="flex gap-2 mb-2 text-sm">
+        <div>author:</div>
+        <Link href={`/user/${collection.userId}`}>
+          <UILink>{collection.User.name}</UILink>
+        </Link>
+      </div>
       {collection.image && (
         <div className="relative w-full h-[600px] overflow-hidden mb-8">
           <Image src={collection.image as string} alt="collection image" fill className="object-cover" />
@@ -49,7 +55,7 @@ export default async function Page({ params }: PageProps) {
       ) : (
         ""
       )}
-      <ItemsGrid items={collection.items} />
+      <ItemsGrid items={collection.items} withActions={session?.user.id === collection.id || session?.user.role === "ADMIN"} />
     </div>
   );
 }

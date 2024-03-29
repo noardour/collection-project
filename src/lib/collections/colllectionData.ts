@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export async function fetchCollection(id: ICollection["id"]) {
   unstable_noStore();
-  return await prisma.collection.findUnique({ where: { id }, include: { items: true } });
+  return await prisma.collection.findUnique({ where: { id }, include: { items: true, User: true } });
 }
 
 export async function fetchLatestCollections() {
