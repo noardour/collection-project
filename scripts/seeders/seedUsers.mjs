@@ -5,19 +5,19 @@ const prisma = new PrismaClient();
 
 const seedUsers = async () => {
   const data = [
-    ...Array.from({ length: 5 }, (_, i) => ({
+    ...Array.from({ length: 2 }, (_, i) => ({
       name: `Admin${i}`,
       email: `admin${i}@test.com`,
       password: "1234",
       role: "ADMIN",
     })),
-    ...Array.from({ length: 5 }, (_, i) => ({
+    ...Array.from({ length: 2 }, (_, i) => ({
       name: `Test${i}`,
       email: `test${i}@test.com`,
       password: "1234",
       role: "USER",
     })),
-    ...Array.from({ length: 10 }, () => ({
+    ...Array.from({ length: 6 }, () => ({
       name: faker.person.fullName(),
       email: faker.internet.email(),
       password: "1234",
