@@ -36,7 +36,7 @@ export default async function Page({ params }: PageProps) {
       <div className="flex gap-2 mb-2 text-sm">
         <div>author:</div>
         <Link href={`/user/${collection.userId}`}>
-          <UILink>{collection.User.name}</UILink>
+          <div className="text-primary underline">{collection.User.name}</div>
         </Link>
       </div>
       {collection.image && (
@@ -45,7 +45,6 @@ export default async function Page({ params }: PageProps) {
         </div>
       )}
       <div className="mb-8">{collection.description}</div>
-      {/* <ItemsTable items={collection.items} /> */}
       {collection.userId === session?.user.id || session?.user.role === "ADMIN" ? (
         <div className="mb-4">
           <Link href={`/collection/${collection.id}/create-item`}>
