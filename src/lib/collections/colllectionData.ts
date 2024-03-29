@@ -19,5 +19,6 @@ export async function fetchBiggestCollections() {
     FROM collections
     LEFT JOIN items ON items.collection_id = collections.id
     GROUP BY collections.id
-    ORDER BY itemCount DESC`) as (ICollection & { itemcount: number })[];
+    ORDER BY itemCount DESC
+    LIMIT 6`) as (ICollection & { itemcount: bigint })[];
 }
