@@ -1,13 +1,11 @@
 import { fetchCollection } from "@/lib/collections/colllectionData";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import ItemsTable from "../ItemsTable";
 import auth from "@/middleware";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import ItemsGrid from "../ItemsGrid";
 import Actions from "@/components/Actions";
-import { remove } from "@/lib/collections/collectionActions";
 
 interface PageProps {
   params: {
@@ -18,6 +16,9 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const collection = await fetchCollection(params.id);
   const session = await auth();
+  console.log("collection");
+  console.log(collection);
+  console.log("collection");
   if (!collection) notFound();
   return (
     <div>
@@ -35,9 +36,11 @@ export default async function Page({ params }: PageProps) {
         <div>category:</div>
         <div>{collection.category}</div>
       </div>
-      <div className="relative w-full h-[600px] overflow-hidden">
-        <Image src={collection.image as string} alt="collection image" fill className="object-cover" />
-      </div>
+      {collection.image && (
+        <div className="relative w-full h-[600px] overflow-hidden">
+          <Image src={collection.image as string} alt="collection image" fill className="object-cover" />
+        </div>
+      )}
       <div className="mb-8">{collection.description}</div>
       {/* <ItemsTable items={collection.items} /> */}
       {collection.userId === session?.user.id || session?.user.role === "ADMIN" ? (
