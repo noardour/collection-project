@@ -16,9 +16,6 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const collection = await fetchCollection(params.id);
   const session = await auth();
-  console.log("collection");
-  console.log(collection);
-  console.log("collection");
   if (!collection) notFound();
   return (
     <div>
@@ -26,7 +23,7 @@ export default async function Page({ params }: PageProps) {
         <h1 className="text-3xl font-bold mb-8">{collection.title}</h1>
         {session?.user.id === collection.userId || session?.user.role === "ADMIN" ? (
           <div className="ml-auto">
-            <Actions editHref="/" />
+            <Actions editHref={`/collection/${collection.id}/edit`} />
           </div>
         ) : (
           ""
@@ -37,7 +34,7 @@ export default async function Page({ params }: PageProps) {
         <div>{collection.category}</div>
       </div>
       {collection.image && (
-        <div className="relative w-full h-[600px] overflow-hidden">
+        <div className="relative w-full h-[600px] overflow-hidden mb-8">
           <Image src={collection.image as string} alt="collection image" fill className="object-cover" />
         </div>
       )}
