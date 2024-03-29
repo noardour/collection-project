@@ -6,4 +6,5 @@ export interface IItem {
   image: string;
 
   collection?: ICollection;
+  collectionId?: ICollection["id"];
 }

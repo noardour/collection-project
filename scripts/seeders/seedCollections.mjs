@@ -73,7 +73,6 @@ const seedCollections = async () => {
   const promises = [];
 
   users.forEach(async (user) => {
-    console.log(generators[Math.round(Math.random() * (generators.length - 1))](user.id));
     await prisma.collection.create({ data: generators[Math.round(Math.random() * (generators.length - 1))](user.id) });
     await prisma.collection.create({ data: generators[Math.round(Math.random() * (generators.length - 1))](user.id) });
   });
