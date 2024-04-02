@@ -17,7 +17,6 @@ export const getGCPCredentials = () => {
 const storage = new Storage(getGCPCredentials());
 
 export async function uploadFile(file: File, fileOutputName: string) {
-  if (process.env.NODE_ENV === "production") return "https://pbs.twimg.com/media/EWgGu_MXsAE24E7?format=jpg&name=small";
   try {
     const storageFile = storage.bucket(process.env.BUCKET_NAME as string).file(fileOutputName);
     await storageFile.save(Buffer.from(await file.arrayBuffer()));
@@ -28,7 +27,6 @@ export async function uploadFile(file: File, fileOutputName: string) {
 }
 
 export async function removeFile(fileStoragePath: string) {
-  if (process.env.NODE_ENV === "production") return;
   const urlMatch = fileStoragePath.match(/^https:\/\/storage\.googleapis\.com\/([^\/]+)\/(.+)$/);
   const filePath = decodeURIComponent((urlMatch && urlMatch[2]) as string);
   const file = storage.bucket(process.env.BUCKET_NAME as string).file(filePath as string);

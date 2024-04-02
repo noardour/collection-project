@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import creditailProvider from "./providers/credentials";
 import { PrismaClient } from "@prisma/client/edge";
 import NextAuth from "next-auth";
+import notFound from "@/app/not-found";
 
 const prisma = new PrismaClient();
 
@@ -35,9 +36,6 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.status = user.status;
       }
       return session;
-    },
-    jwt({ token }) {
-      return token;
     },
   },
   debug: process.env.NODE_ENV == "development",

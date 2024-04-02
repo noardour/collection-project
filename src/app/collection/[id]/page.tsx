@@ -54,7 +54,7 @@ export default async function Page({ params }: PageProps) {
       ) : (
         ""
       )}
-      <ItemsGrid items={collection.items} withActions={session?.user.id === collection.id || session?.user.role === "ADMIN"} />
+      <ItemsGrid items={collection.items} withActions={true} />
     </div>
   );
 }
